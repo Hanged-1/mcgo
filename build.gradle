@@ -1,0 +1,73 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version "1.17.19"
+    id 'maven-publish'
+}
+
+group = "com.dsh.goweiqi"
+version = "0.1.0"
+
+// 技术钉选见 PLAN-mcgo.md §0：MC 1.21.1 / loader 0.19.5 / loom 1.17.19 /
+// fabric-api 0.116.17+1.21.1 / mojmap / Java 21。与同工作区 proj-hatcommand 完全一致。
+dependencies {
+    minecraft "com.mojang:minecraft:1.21.1"
+    // 官方 Mojang 映射（mojmap）：1.21.x 线全部用 mojmap，不用 yarn。
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:0.19.5"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.116.17+1.21.1"
+
+    // 规则引擎（rules 包）零 MC 依赖，要能脱离游戏跑单测。
+    // 走 Maven Central 的标准坐标：公开仓库不需要随仓库携带 jar。
+    testImplementation "junit:junit:4.13.2"
+}
+
+loom {
+    // 客户端代码（BER / Screen / 程序化贴图）隔离到 src/client/java，
+    // 主入口绝不能引用它，否则专用服务器 ClassNotFound。
+    splitEnvironmentSourceSets()
+
+    mods {
+        "mcgo" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+processResources {
+    // 把 Gradle version 展开进 fabric.mod.json 的 ${version}。
+    filesMatching('fabric.mod.json') {
+        expand "version": version
+    }
+}
+
+// 目标 Java 版本用 toolchain 声明；gradle.properties 里已用 org.gradle.java.home
+// 指向本机 JDK 21（D:/Deepseek Harness/minecraft/servers/1.21.1server/java21），不走 foojay 下载。
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// JUnit 4（文件依赖，无需仓库）。测试全绿是 C1 的硬性判据。
+test {
+    useJUnit()
+    testLogging {
+        events "passed", "failed", "skipped"
+        exceptionFormat "full"
+    }
+}
+
+// rules 包是零 MC 依赖的纯 Java：测试不需要 minecraft + fabric-api 上 classpath。
+// extendsFrom 只管「继承」，直接挂在 testImplementation 上的文件依赖不受影响。
+configurations.testImplementation.setExtendsFrom([])
+configurations.testRuntimeOnly.setExtendsFrom([])
+
+// 该模块只有 POM、没有实际内容，本机缓存里没有 0.116.17 版本；test 配置并不需要它。
+configurations.all {
+    exclude group: 'net.fabricmc.fabric-api', module: 'fabric-api-deprecated'
+}

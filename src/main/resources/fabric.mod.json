@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "mcgo",
+  "version": "${version}",
+  "name": "mcgo",
+  "description": "服务端双人对弈围棋：19 路 3×3 棋盘台面、GUI + 世界内落子、中国规则自动数子。",
+  "authors": ["DSH"],
+  "license": "MIT",
+  "icon": "assets/mcgo/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.dsh.goweiqi.GoWeiqiMod"],
+    "client": ["com.dsh.goweiqi.client.GoWeiqiClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

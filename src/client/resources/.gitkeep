@@ -1,0 +1,2 @@
+# 客户端独占资源目录（splitEnvironmentSourceSets 的 src/client/resources）。
+# 盘面与棋子贴图由客户端程序化生成（BoardTextures），这里不放任何 PNG。

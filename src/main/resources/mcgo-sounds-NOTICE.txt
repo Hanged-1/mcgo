@@ -1,0 +1,15 @@
+音效来源说明
+============
+
+assets/mcgo/sounds/*.ogg 由 Sabaki 0.52.2 的音效文件转码而来。
+
+Sabaki 是 MIT 许可的开源围棋软件：
+  https://github.com/SabakiHQ/Sabaki
+  Copyright (c) Yichuan Shen
+
+原文件为 Sabaki 的 data/0.mp3、1.mp3、2.mp3（落子音）与
+data/capture0.mp3、capture1.mp3、capture2.mp3（提子音），
+本模组用 ffmpeg 转为单声道 44.1kHz Vorbis（libvorbis q5）后打包。
+
+按 MIT 许可要求，此处保留上游版权与许可说明。若需再分发本模组，
+请一并保留本文件。

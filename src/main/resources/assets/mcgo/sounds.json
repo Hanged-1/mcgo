@@ -1,0 +1,20 @@
+{
+  "stone": {
+    "category": "blocks",
+    "subtitle": "subtitles.mcgo.stone",
+    "sounds": [
+      "mcgo:stone0",
+      "mcgo:stone1",
+      "mcgo:stone2"
+    ]
+  },
+  "capture": {
+    "category": "blocks",
+    "subtitle": "subtitles.mcgo.capture",
+    "sounds": [
+      "mcgo:capture0",
+      "mcgo:capture1",
+      "mcgo:capture2"
+    ]
+  }
+}

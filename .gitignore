@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+
+# Loom dev run directories
+run/
+.fabric/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Local test-only jars (JUnit now comes from Maven Central)
+libs/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini

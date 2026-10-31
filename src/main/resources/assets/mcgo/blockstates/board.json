@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "x=0,z=0": { "model": "mcgo:block/board" },
+    "x=0,z=1": { "model": "mcgo:block/board" },
+    "x=0,z=2": { "model": "mcgo:block/board" },
+    "x=1,z=0": { "model": "mcgo:block/board" },
+    "x=1,z=1": { "model": "mcgo:block/board" },
+    "x=1,z=2": { "model": "mcgo:block/board" },
+    "x=2,z=0": { "model": "mcgo:block/board" },
+    "x=2,z=1": { "model": "mcgo:block/board" },
+    "x=2,z=2": { "model": "mcgo:block/board" }
+  }
+}
